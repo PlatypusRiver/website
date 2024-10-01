@@ -1,4 +1,4 @@
-export async function onRequestPost(req) {
+export async function onRequestPost(context) {
   const from = (await context.request.formData()).get("from");
   const phone = (await context.request.formData()).get("phone");
   const message = (await context.request.formData()).get("fromessagem");
