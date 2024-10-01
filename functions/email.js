@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
     body: JSON.stringify({
       personalizations: [
         {
-          to: [{ email: context.env.EMAIL_RECIPIENT1 }]
+          to: [{ email: context.env.EMAIL_RECIPIENT1 },{ email: context.env.EMAIL_RECIPIENT2 }]
         },
       ],
       from: { email: context.env.EMAIL_SENDER },
