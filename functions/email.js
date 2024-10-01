@@ -6,7 +6,7 @@ export async function onRequestPost(context) {
   if(from.search('@') === -1 || phone == "555-555-1212" || ["thousands", "rich", "millionaire", "profit", "financial", "capital", "congrat", "wallet", "dollar", "money","robot","cash", "income","job", "bot", "earn", "rank", "boost", "seo", "crypto", "$"].some(x => message.toLowerCase().includes(x))){//bs spammers
     return;
   }
-  await fetch("https://api.sendgrid.com/v3/mail/send", {
+  const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${context.env.SENDGRID_API_KEY}`,
@@ -22,5 +22,6 @@ export async function onRequestPost(context) {
       subject: "Platypus River Contact Form","content": [{"type": "text/plain", "value": `${message} \r\nPhone: ${phone}, Email: ${from}`}]
     }),
   });
-  return new Response("Email Sent!")
+  console.log(response)
+  return new Response("Email Response:" + response.status)
 }
