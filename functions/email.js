@@ -1,4 +1,4 @@
-export async function onRequestPost(context) {
+export async function onRequestPost(context, env) {
   const req = await context.request.formData();
   const from = req.get("from");
   const phone = req.get("phone");
@@ -9,7 +9,7 @@ export async function onRequestPost(context) {
   await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${context.env.SENDGRID_API_KEY}`,
+      Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -22,14 +22,5 @@ export async function onRequestPost(context) {
       subject: "Platypus River Contact Form","content": [{"type": "text/plain", "value": `${message} \r\nPhone: ${phone}, Email: ${from}`}]
     }),
   });
-  const html = `<!DOCTYPE html>
-    <body>
-      <h1>Email Sent</h1>
-    </body>`;
-
-    return new Response(html, {
-      headers: {
-        "content-type": "text/html;charset=UTF-8",
-      },
-    });
+  return new Response("Email Sent!")
 }
