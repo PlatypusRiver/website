@@ -1,7 +1,8 @@
-const sgMail = require('@sendgrid/mail');
-module.exports = (req, res) => {
 
-  const { from = 'nobody@fake.com', message = 'Empty', phone = 'test' } = req.body
+
+export function onRequest(req) {
+  const sgMail = require('@sendgrid/mail');
+  const { from = 'nobody@fake.com', message = 'Empty', phone = 'test' } = req.params
 
   sgMail.setApiKey(process.env.SENDGRIDKEY);
   const msg = {

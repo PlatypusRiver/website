@@ -1,8 +1,0 @@
-{
-  "engines": {
-    "node": "12.x"
-  },
-  "dependencies": {
-    "@sendgrid/mail": "^6.5.1"
-  }
-}
