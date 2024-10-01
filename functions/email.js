@@ -1,4 +1,4 @@
-export async function onRequestPost(context, env) {
+export async function onRequestPost(context) {
   const req = await context.request.formData();
   const from = req.get("from");
   const phone = req.get("phone");
@@ -9,7 +9,7 @@ export async function onRequestPost(context, env) {
   await fetch("https://api.sendgrid.com/v3/mail/send", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${env.SENDGRID_API_KEY}`,
+      Authorization: `Bearer ${context.env.SENDGRID_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
