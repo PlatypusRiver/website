@@ -1,7 +1,8 @@
 export async function onRequestPost(context) {
-  const from = (await context.request.formData()).get("from");
-  const phone = (await context.request.formData()).get("phone");
-  const message = (await context.request.formData()).get("fromessagem");
+  const req = await context.request.formData();
+  const from = req.get("from");
+  const phone = req.get("phone");
+  const message = req.get("message");
   if(from.search('@') === -1 || phone == "555-555-1212" || ["thousands", "rich", "millionaire", "profit", "financial", "capital", "congrat", "wallet", "dollar", "money","robot","cash", "income","job", "bot", "earn", "rank", "boost", "seo", "crypto", "$"].some(x => message.toLowerCase().includes(x))){//bs spammers
     return;
   }
