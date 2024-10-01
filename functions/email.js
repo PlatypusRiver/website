@@ -22,7 +22,14 @@ export async function onRequestPost(context) {
       subject: "Platypus River Contact Form","content": [{"type": "text/plain", "value": `${message} \r\nPhone: ${phone}, Email: ${from}`}]
     }),
   });
-  return new Response(null, {
-    status: 200,
-  });
+  const html = `<!DOCTYPE html>
+    <body>
+      <h1>Email Sent</h1>
+    </body>`;
+
+    return new Response(html, {
+      headers: {
+        "content-type": "text/html;charset=UTF-8",
+      },
+    });
 }
