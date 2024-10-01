@@ -15,13 +15,12 @@ export async function onRequestPost(context) {
     body: JSON.stringify({
       personalizations: [
         {
-          to: [{ email: 'colton.correll@platypusriver.com' }]
+          to: [{ email: context.env.EMAIL_RECIPIENT1 }]
         },
       ],
-      from: { email: from },
+      from: { email: context.env.EMAIL_SENDER },
       subject: "Platypus River Contact Form","content": [{"type": "text/plain", "value": `${message} \r\nPhone: ${phone}, Email: ${from}`}]
     }),
   });
-  console.log(response)
   return new Response("Email Response:" + response.status)
 }
